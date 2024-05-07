@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <style>
+        body {
+            background-color: rgb(33, 34, 30);
+        }
+
+        .banner {
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            letter-spacing: 5px;
+            font-size: x-large;
+            color: white;
+            font-weight: bold;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            color: whitesmoke;
+            letter-spacing: 2px;
+        }
+
+        .container p {
+            border: solid 2px rgb(33, 34, 30);
+            border-radius: 10px;
+            background-color: white;
+            color: black;
+            margin: 20px 550px 20px 550px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: x-large;
+        }
+
+        .container h4 {
+            border: solid 2px rgb(33, 34, 30);
+            border-radius: 10px;
+            background-color: white;
+            color: rgb(0, 0, 0);
+            margin: 20px 350px 20px 350px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: large;
+            font-style: oblique;
+        }
+
+        input[type="text"] {
+            margin-top: 20px;
+            padding: 20px 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #36f805;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #36f805;
+            color: white;
+            font-size: larger;
+        }
+
+        #btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #btn:hover {
+            background-color: red;
+            color: white;
+            font-size: larger;
+        }
+
+        .foot {
+            align-items: center;
+            background-color: #11111133;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .fa {
+            padding: 10px;
+            font-size: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 25%;
+        }
+
+        .fa-facebook {
+            background: #3a73f8;
+            color: white;
+        }
+
+        .fa-linkedin {
+            background: #1727dd;
+            color: white;
+        }
+
+        .fa-google {
+            background-color: rgb(200, 25, 25);
+            color: white;
+        }
+
+        .fa-instagram {
+            background: linear-gradient(#f9ce34, #ee2a7b, #6228d7);
+            color: white;
+        }
+
+        .fa-github {
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+    <div class="banner">
+        <marquee behavior="round" direction="rights">You can take free tests everytime..</marquee>
+        <h1>Welcome to type-'STAR'</h1>
+        <p>(You can learn on your own time)</p>
+    </div>
+
+    <div class="container">
+        <h2>Let's take a Test</h2>
+        Instructions: <br>&#x2022; First select time 1-min or 2-min.<br>
+        &#x2022; Click the Start button 'Start typing'. <br>
+        &#x2022; Click Reset button to 'Reset test'.
+        <h4 id="quote"></h4>
+        <input type="text" id="input" placeholder="Type the above text..."> <br>
+        <button onclick="setDuration(60)">60 sec</button>
+        <button onclick="setDuration(120)">2 min</button> <br>
+        <button onclick="startTest()">Start</button>
+        <button onclick="resetTest()" id="btn">Reset</button> 
+        
+        <h2 id="timer">00:00</h2>
+        <h2>Your Result</h2>
+        <p id="result"></p>
+    </div>
+    <footer class="foot">
+        <center>
+            <p>&copy; 2024 Tuhin Pratihar . All rights reserved.</p>
+            <p>| Privacy Policy | Terms of Service |</p>
+            <p>Visit on social plartform</p>
+        </center>
+        <center>
+            <a href="https://www.linkedin.com/in/tuhin-pratihar-b96006252/" class="fa fa-linkedin"></a>
+            <a href="https://www.instagram.com/its_tuhi_n/" class="fa fa-instagram"></a>
+            <a href="https://github.com/Tuhin20010" class="fa fa-github"></a>
+            <a href="https://www.facebook.com/tuhin.pratihar.33" class="fa fa-facebook"></a>
+        </center>
+    </footer>
+    <script>
+        const sentences = [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur metus non elit laoreet, eu consectetur justo sodales. Integer malesuada enim nec ex iaculis, at eleifend lectus efficitur. Ut aliquet, justo a convallis mattis, nisi turpis volutpat odio, nec ultricies libero purus id magna. Vivamus aliquam lectus a nunc accumsan, nec tristique sem condimentum. Aenean vel lacus ligula. Vivamus accumsan dictum nulla, ut cursus tortor tincidunt eu.",
+            "Sed vel ultrices est. In posuere sem in ipsum consectetur, ac venenatis ipsum dapibus. Nunc varius, leo id feugiat fermentum, nulla felis dictum leo, ac fermentum mi magna in justo. Proin et eros risus. Nam commodo vestibulum justo, eu placerat orci aliquet vitae. Nullam malesuada odio vel augue finibus, ut sodales sem pellentesque. Donec lacinia, orci nec vulputate bibendum, metus nisi efficitur nunc, nec efficitur risus mi quis nisi.",
+            "Integer sit amet ex non orci iaculis venenatis. Phasellus dictum viverra justo, eu dictum libero interdum eget. Fusce luctus luctus nibh nec tempor. Sed accumsan bibendum mi, sit amet sodales eros efficitur ac. Fusce nec libero lorem. Maecenas tempus arcu a erat fermentum bibendum. Ut vitae purus vel turpis tempus ultricies id ac dui. Praesent sed nibh dolor.",
+            "Pellentesque placerat mattis fermentum. Vivamus consectetur fermentum quam, sit amet rhoncus nisi varius vel. Suspendisse sit amet eros et tellus faucibus ultrices. Donec non lorem non est tempus viverra. Aenean tincidunt mauris nec est gravida, ut egestas felis interdum. Morbi bibendum urna nec metus aliquam, nec vehicula purus interdum. Duis vel erat orci. Phasellus ultricies, odio in consequat auctor, lorem metus congue velit, sit amet dignissim libero nisi non eros.",
+            "Etiam fringilla turpis vitae libero maximus, in convallis libero viverra. Phasellus non malesuada nulla, ut interdum risus. In hac habitasse platea dictumst. Duis condimentum auctor aliquam. Nunc auctor nisl vitae justo vehicula, vel fermentum justo interdum. Proin ut ipsum et enim sollicitudin fringilla. Sed vitae placerat odio. Curabitur non diam eu lectus bibendum tempor."
+        ];
+
+        let startTime, endTime, timerInterval, duration = 60;
+        let testStarted = false;
+
+        function getRandomQuote() {
+            return sentences[Math.floor(Math.random() * sentences.length)];
+        }
+
+        function displayQuote() {
+            const quote = getRandomQuote();
+            document.getElementById('quote').textContent = quote;
+        }
+
+        function startTimer() {
+            startTime = new Date().getTime(); // Use global startTime variable
+            timerInterval = setInterval(function () {
+                let now = new Date().getTime();
+                let elapsedTime = now - startTime;
+                let remainingTime = duration - Math.floor(elapsedTime / 1000);
+                let minutes = Math.floor(remainingTime / 60);
+                let seconds = remainingTime % 60;
+                document.getElementById('timer').textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    endTest();
+                }
+            }, 1000);
+        }
+
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function startTest() {
+            if (!testStarted) {
+                testStarted = true;
+                displayQuote();
+                document.getElementById('input').value = '';
+                document.getElementById('result').textContent = '';
+
+                document.getElementById('input').disabled = false;
+                document.getElementById('input').focus();
+                startTimer();
+            } else {
+                alert("Test has already started. Please continue typing.");
+            }
+        }
+
+        function resetTest() {
+            testStarted = false;
+            clearInterval(timerInterval);
+            document.getElementById('input').disabled = true;
+            document.getElementById('input').value = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('timer').textContent = '00:00';
+        }
+
+        function endTest() {
+            stopTimer(); // Stop timer when the test ends
+            endTime = new Date();
+            const inputText = document.getElementById('input').value;
+            const quote = document.getElementById('quote').textContent;
+            const words = inputText.split(' ');
+            const quoteWords = quote.split(' ');
+
+            let correctWords = 0;
+            for (let i = 0; i < words.length; i++) {
+                if (words[i] === quoteWords[i]) {
+                    correctWords++;
+                }
+            }
+
+            const accuracy = (correctWords / quoteWords.length) * 100;
+            let totalTime = (endTime - startTime) / 1000;
+
+            if (totalTime <= 0) {
+                document.getElementById('result').textContent = "Test duration is too short.";
+                return;
+            }
+
+            const speed = Math.round((correctWords / totalTime) * 60);
+
+            document.getElementById('result').innerHTML = `
+                <b>Accuracy: ${accuracy.toFixed(2)}%</b> <br>
+                <b>Speed: ${speed} words per minute</b>
+            `;
+        }
+
+        document.getElementById('input').addEventListener('input', function () {
+            if (!testStarted) {
+                document.getElementById('result').textContent = "Please click the Start Test button to begin typing.";
+                this.value = '';
+            } else {
+                document.getElementById('result').textContent = '';
+                const inputText = this.value;
+                const quote = document.getElementById('quote').textContent;
+                const quoteWords = quote.split(' ');
+                const inputWords = inputText.split(' ');
+
+                if (inputWords.length === quoteWords.length) {
+                    endTest();
+                }
+            }
+        });
+
+        function setDuration(option) {
+            if (option === 60) {
+                duration = 60;
+            } else if (option === 120) {
+                duration = 120;
+            }
+            resetTest();
+        }
+    </script>
+</body>
+
+</html>
