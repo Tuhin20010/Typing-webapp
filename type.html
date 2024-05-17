@@ -136,32 +136,35 @@
     </style>
 
     <div class="banner">
-        <marquee behavior="round" direction="rights">You can take free tests everytime..</marquee>
+        <marquee behavior="round" direction="rights">You can take free tests every time..</marquee>
         <h1>Welcome to type-'STAR'</h1>
         <p>(You can learn on your own time)</p>
     </div>
 
     <div class="container">
         <h2>Let's take a Test</h2>
-        Instructions: <br>&#x2022; First select time 1-min or 2-min.<br>
-        &#x2022; Click the Start button 'Start typing'. <br>
-        &#x2022; Click Reset button to 'Reset test'.
         <h4 id="quote"></h4>
-        <input type="text" id="input" placeholder="Type the above text..."> <br>
-        <button onclick="setDuration(60)">60 sec</button>
-        <button onclick="setDuration(120)">2 min</button> <br>
-        <button onclick="startTest()">Start</button>
-        <button onclick="resetTest()" id="btn">Reset</button> 
-        
+        <h3>You have to type the above text</h3>
+        <input type="text" id="input" placeholder="Start typing..."> <br>
+        <p id="feedback"></p>
         <h2 id="timer">00:00</h2>
+        <h2 id="speed">Speed: 0 WPM</h2>
+        <button onclick="setDuration(60)">60 seconds</button>
+        <button onclick="setDuration(120)">2 minutes</button> <br>
+        <button onclick="startTest()">Start Test</button>
+        <button onclick="resetTest()" id="btn">Reset Test</button>
+
         <h2>Your Result</h2>
         <p id="result"></p>
+
+
     </div>
+
     <footer class="foot">
         <center>
             <p>&copy; 2024 Tuhin Pratihar . All rights reserved.</p>
             <p>| Privacy Policy | Terms of Service |</p>
-            <p>Visit on social plartform</p>
+            <p>Visit on social platform</p>
         </center>
         <center>
             <a href="https://www.linkedin.com/in/tuhin-pratihar-b96006252/" class="fa fa-linkedin"></a>
@@ -170,6 +173,7 @@
             <a href="https://www.facebook.com/tuhin.pratihar.33" class="fa fa-facebook"></a>
         </center>
     </footer>
+
     <script>
         const sentences = [
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur metus non elit laoreet, eu consectetur justo sodales. Integer malesuada enim nec ex iaculis, at eleifend lectus efficitur. Ut aliquet, justo a convallis mattis, nisi turpis volutpat odio, nec ultricies libero purus id magna. Vivamus aliquam lectus a nunc accumsan, nec tristique sem condimentum. Aenean vel lacus ligula. Vivamus accumsan dictum nulla, ut cursus tortor tincidunt eu.",
@@ -207,7 +211,6 @@
             }, 1000);
         }
 
-
         function stopTimer() {
             clearInterval(timerInterval);
         }
@@ -218,6 +221,7 @@
                 displayQuote();
                 document.getElementById('input').value = '';
                 document.getElementById('result').textContent = '';
+                document.getElementById('feedback').textContent = '';
 
                 document.getElementById('input').disabled = false;
                 document.getElementById('input').focus();
@@ -234,6 +238,8 @@
             document.getElementById('input').value = '';
             document.getElementById('result').textContent = '';
             document.getElementById('timer').textContent = '00:00';
+            document.getElementById('speed').textContent = 'Speed: 0 WPM';
+            document.getElementById('feedback').textContent = '';
         }
 
         function endTest() {
@@ -278,18 +284,31 @@
                 const quoteWords = quote.split(' ');
                 const inputWords = inputText.split(' ');
 
+                // Calculate real-time speed
+                const elapsedTime = (new Date().getTime() - startTime) / 1000;
+                const correctWords = inputWords.filter((word, index) => word === quoteWords[index]).length;
+                const speed = Math.round((correctWords / elapsedTime) * 60);
+                document.getElementById('speed').textContent = `Speed: ${speed} WPM`;
+
+                // Provide real-time feedback on typing accuracy
+                let feedback = '';
+                for (let i = 0; i < inputWords.length; i++) {
+                    if (inputWords[i] === quoteWords[i]) {
+                        feedback += `<span style="color: green">${inputWords[i]} </span>`;
+                    } else {
+                        feedback += `<span style="color: red">${inputWords[i]} </span>`;
+                    }
+                }
+                document.getElementById('feedback').innerHTML = feedback;
+
                 if (inputWords.length === quoteWords.length) {
                     endTest();
                 }
             }
         });
 
-        function setDuration(option) {
-            if (option === 60) {
-                duration = 60;
-            } else if (option === 120) {
-                duration = 120;
-            }
+        function setDuration(time) {
+            duration = time;
             resetTest();
         }
     </script>
